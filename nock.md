@@ -1,3 +1,5 @@
+# Nock
+
 A **noun** is either an **atom** (an unsigned integer) or a *cell*. A **cell** is an ordered pair of *nouns*.
 The first *noun* in the cell is called the **head** and the second *noun* in the cell is called the **tail**,
 i.e. `[head tail]`.
@@ -137,3 +139,19 @@ Here is the reduction:
     *[*[a c] [2 [[0 1] [0 b]]]] ☞
     *[*[*[a c] [0 1]] *[*[a c] [0 b]]] ☞
     *[*[a c] *[*[a c] [0 b]]]
+
+`[10 [b c]]` is a *formula* that throws away `b` and just applies `c` to the subject.
+
+However, if `b` is a cell, its second component is applied to the subject first (before also being thrown away).
+
+The only reason to apply a formula only to throw away the product is to detect a crash.
+
+This reduction makes this a little clearer:
+
+    *[a [10 [[b c] d]]] =>
+    *[a [8 [c [7 [[0 3] d]]]]] =>
+    *[[*[a c] a] [7 [[0 3] d]]] =>
+    *[*[[*[a c] a] [0 3]] d] =>
+    *[a d]
+
+If `*[a c]` crashes then `d` will not be applied to `a`.
