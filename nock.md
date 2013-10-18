@@ -155,3 +155,8 @@ This reduction makes this a little clearer:
     *[a d]
 
 If `*[a c]` crashes then `d` will not be applied to `a`.
+
+## Relationship to SKI combinator calculus
+
+`[2 [b c]]`, `[1 a]` and `[0 1]` are analogous to the S, K and I combinators respectively. They are not, however,
+exactly equivalent (at least in the case of `[2 [b c]]`). The difference seems to lie in the use of the `*` operator.
